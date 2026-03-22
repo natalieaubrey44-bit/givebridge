@@ -32,7 +32,7 @@ export const GlobalModal: React.FC = () => {
 
   return (
     <div 
-      className="fixed inset-0 z-100 flex items-center justify-center p-4 sm:p-6" 
+      className="fixed inset-0 z-100 flex items-start justify-center overflow-y-auto p-4 sm:items-center sm:p-6" 
       onClick={closeModal}
     >
       {/* Backdrop */}
@@ -55,10 +55,10 @@ export const GlobalModal: React.FC = () => {
           maxWidth: isWide ? '900px' : '512px' 
         }}
         transition={{ type: "spring", damping: 25, stiffness: 300 }}
-        className="relative w-full overflow-hidden rounded-[48px] border-4 border-white bg-brand-cream shadow-[0_32px_120px_rgba(0,0,0,0.3)] p-1 z-10"
+        className="relative z-10 flex w-full max-h-[calc(100dvh-2rem)] min-w-0 flex-col overflow-hidden rounded-[48px] border-4 border-white bg-brand-cream p-1 shadow-[0_32px_120px_rgba(0,0,0,0.3)] sm:max-h-[calc(100dvh-3rem)]"
         onClick={(event) => event.stopPropagation()}
       >
-        <div className="bg-brand-cream rounded-[44px] p-5 sm:p-6 relative overflow-hidden">
+        <div className="bg-brand-cream relative flex min-h-0 flex-1 flex-col overflow-y-auto rounded-[44px] p-4 sm:p-6">
           {/* Abstract subtle background gradient */}
           <div className="absolute inset-x-0 top-0 h-64 bg-linear-to-b from-brand-lime/20 via-brand-lime/5 to-transparent pointer-events-none" />
           
@@ -71,7 +71,7 @@ export const GlobalModal: React.FC = () => {
             <X size={16} />
           </button>
 
-          <div className="relative z-10">
+          <div className="relative z-10 min-w-0">
             <FlowRenderer />
           </div>
         </div>

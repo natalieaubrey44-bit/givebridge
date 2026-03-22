@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from 'motion/react';
 // This component wraps each step to ensure consistent layout/animation if needed
 const StepWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <div className="animate-in fade-in slide-in-from-right-4 duration-300">
+    <div className="min-w-0 animate-in fade-in slide-in-from-right-4 duration-300">
       {children}
     </div>
   );
@@ -58,12 +58,12 @@ export const FlowRenderer: React.FC = () => {
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: -10 }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
-        className="flex flex-col h-full"
+        className="flex min-w-0 flex-col"
       >
         <StepWrapper>
-          <div className="flex flex-col h-full">
+          <div className="flex min-w-0 flex-col">
             {/* Step Header */}
-            <div className="relative pb-6 border-b border-black/5 mb-8">
+            <div className="relative mb-6 border-b border-black/5 pb-5 sm:mb-8 sm:pb-6">
               <div className="flex items-center justify-between mb-4">
                 <div className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-3 py-1 text-[9px] font-black uppercase tracking-[0.2em] text-black/60 shadow-sm">
                   <span className="h-1.5 w-1.5 rounded-full bg-brand-lime" />
@@ -72,19 +72,19 @@ export const FlowRenderer: React.FC = () => {
                   Page {currentStep + 1} of {flowSteps.length}
                 </div>
               </div>
-              <h3 className="text-3xl font-black uppercase tracking-tight text-black leading-tight">
+              <h3 className="text-2xl font-black uppercase tracking-tight text-black leading-tight sm:text-3xl">
                 {title}
               </h3>
               {subtitle && <p className="text-[10px] font-black text-black/40 mt-1 uppercase tracking-widest leading-relaxed">{subtitle}</p>}
             </div>
 
             {/* Step Content */}
-            <div className="flex-1 min-h-[200px]">
+            <div className="min-h-[200px] min-w-0">
               {content}
             </div>
 
             {/* Step Footer */}
-            <div className="mt-10 pt-6 border-t border-black/10 flex items-center justify-between gap-4">
+            <div className="mt-8 flex items-center justify-between gap-4 border-t border-black/10 pt-5 sm:mt-10 sm:pt-6">
               <div className="flex gap-3">
                 {!isFirst && (
                   <button

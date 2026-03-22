@@ -206,7 +206,7 @@ const CampaignStoryStep = ({ data, onNext, onBack, currentStep, totalSteps, ...p
       <div className="grid md:grid-cols-[1.1fr_0.9fr] gap-6">
         {/* Left Column: Story Text */}
         <div className="flex flex-col gap-4">
-           <h2 className="text-2xl font-black uppercase tracking-tight mb-0.5">His Story</h2>
+           <h2 className="text-xl font-black uppercase tracking-tight mb-0.5 sm:text-2xl">His Story</h2>
            <div className="prose prose-xs max-w-none text-black/60 font-medium leading-[1.6] space-y-3">
              {data.story.split('\n\n').slice(0, 3).map((p: string, i: number) => (
                 <StoryParagraph key={i} text={p} />
@@ -297,7 +297,7 @@ const CampaignMedicalStep = ({ data, onNext, onBack, currentStep, totalSteps, ..
   return (
     <div className="flex flex-col gap-6 py-1">
       <FlowBadge currentStep={currentStep} totalSteps={totalSteps} />
-      <h2 className="text-2xl font-black uppercase tracking-tight">Medical Details</h2>
+      <h2 className="text-xl font-black uppercase tracking-tight sm:text-2xl">Medical Details</h2>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
         {details.map((detail, i) => (
@@ -473,7 +473,7 @@ export const flows = {
     {
       title: "Choose Amount",
       content: (
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           {[25, 50, 100, 250].map((amt) => (
             <button key={amt} className="p-4 border-2 border-black/5 hover:border-black rounded-xl font-black transition-all text-base">
               ${amt}
