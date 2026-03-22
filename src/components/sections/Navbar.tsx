@@ -11,6 +11,7 @@ export function Navbar({ onHomeClick, onCampaignClick }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
+    if (typeof IntersectionObserver === "undefined") return;
     const ids = ["home", "campaigns", "how-it-works", "testimonials", "donate", "contact"];
     const observers: IntersectionObserver[] = [];
 

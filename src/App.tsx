@@ -8,6 +8,7 @@ import { TestimonialsSection } from "./components/sections/TestimonialsSection";
 import { CTASection } from "./components/sections/CTASection";
 import { FooterSection } from "./components/sections/FooterSection";
 import { HashtagTicker } from "./components/sections/HashtagTicker";
+import { AppErrorBoundary } from "./components/AppErrorBoundary";
 import { CAMPAIGNS_DATA } from "./data/campaignsData";
 
 function AppContent() {
@@ -39,7 +40,9 @@ function AppContent() {
 export default function App() {
   return (
     <ModalFlowProvider>
-      <AppContent />
+      <AppErrorBoundary>
+        <AppContent />
+      </AppErrorBoundary>
     </ModalFlowProvider>
   );
 }
