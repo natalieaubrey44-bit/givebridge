@@ -63,45 +63,45 @@ export const FlowRenderer: React.FC = () => {
         <StepWrapper>
           <div className="flex min-w-0 flex-col">
             {/* Step Header */}
-            <div className="relative mb-4 border-b border-black/5 pb-4 sm:mb-8 sm:pb-6">
-              <div className="flex items-center justify-between mb-3">
-                <div className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-3 py-1 text-[8px] font-black uppercase tracking-[0.18em] text-black/60 shadow-sm sm:text-[9px]">
+            <div className="relative mb-6 border-b border-black/5 pb-5 sm:mb-8 sm:pb-6">
+              <div className="flex items-center justify-between mb-4">
+                <div className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-3 py-1 text-[9px] font-black uppercase tracking-[0.2em] text-black/60 shadow-sm">
                   <span className="h-1.5 w-1.5 rounded-full bg-brand-lime" />
                   Progress: {Math.round(((currentStep + 1) / flowSteps.length) * 100)}%
                   <span className="mx-2 text-black/20">|</span>
                   Page {currentStep + 1} of {flowSteps.length}
                 </div>
               </div>
-              <h3 className="text-xl font-black uppercase tracking-tight text-black leading-tight sm:text-3xl">
+              <h3 className="text-2xl font-black uppercase tracking-tight text-black leading-tight sm:text-3xl">
                 {title}
               </h3>
-              {subtitle && <p className="mt-1 text-[9px] font-black uppercase tracking-widest leading-relaxed text-black/40">{subtitle}</p>}
+              {subtitle && <p className="text-[10px] font-black text-black/40 mt-1 uppercase tracking-widest leading-relaxed">{subtitle}</p>}
             </div>
 
             {/* Step Content */}
-            <div className="min-h-[160px] min-w-0">
+            <div className="min-h-[200px] min-w-0">
               {content}
             </div>
 
             {/* Step Footer */}
-            <div className="mt-6 flex items-center justify-between gap-3 border-t border-black/10 pt-4 sm:mt-8 sm:pt-6">
+            <div className="mt-8 flex items-center justify-between gap-4 border-t border-black/10 pt-5 sm:mt-10 sm:pt-6">
               <div className="flex gap-3">
                 {!isFirst && (
                   <button
                     onClick={prevStep}
-                    className="flex items-center justify-center gap-2 border-2 border-black/10 px-4 py-2.5 rounded-xl text-[9px] font-black uppercase tracking-widest text-black/50 hover:border-black hover:text-black transition-all active:scale-95 sm:px-5 sm:py-3 sm:text-[10px]"
+                    className="flex items-center justify-center gap-2 border-2 border-black/10 px-5 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest text-black/50 hover:border-black hover:text-black transition-all active:scale-95"
                   >
-                    <ArrowLeft size={12} className="sm:size-3.5" /> Back
+                    <ArrowLeft size={14} /> Back
                   </button>
                 )}
               </div>
               
               <button
                 onClick={nextStep}
-                className="inline-flex items-center justify-center gap-2 bg-black text-white px-6 py-2.5 rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-gray-900 transition-all shadow-lg group border-2 border-black active:scale-95 sm:px-8 sm:py-3 sm:text-[10px]"
+                className="inline-flex items-center justify-center gap-2 bg-black text-white px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-gray-900 transition-all shadow-lg group border-2 border-black active:scale-95"
               >
                  {isLast ? "Complete" : (nextLabel || "Next Step")}
-                 {!isLast && <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform sm:size-3.5" />}
+                 {!isLast && <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />}
               </button>
             </div>
           </div>
