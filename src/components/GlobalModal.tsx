@@ -32,7 +32,7 @@ export const GlobalModal: React.FC = () => {
 
   return (
     <div 
-      className="fixed inset-0 z-100 flex items-start justify-center overflow-y-auto p-4 sm:items-center sm:p-6" 
+      className="fixed inset-0 z-100 flex items-start justify-center overflow-y-auto p-3 sm:items-center sm:p-4" 
       onClick={closeModal}
     >
       {/* Backdrop */}
@@ -55,10 +55,10 @@ export const GlobalModal: React.FC = () => {
           maxWidth: isWide ? '900px' : '512px' 
         }}
         transition={{ type: "spring", damping: 25, stiffness: 300 }}
-        className="relative z-10 flex w-full max-h-[calc(100dvh-2rem)] min-w-0 flex-col overflow-hidden rounded-[48px] border-4 border-white bg-brand-cream p-1 shadow-[0_32px_120px_rgba(0,0,0,0.3)] sm:max-h-[calc(100dvh-3rem)]"
+        className="relative z-10 flex w-full max-h-[calc(100dvh-1.5rem)] min-w-0 flex-col overflow-hidden rounded-[40px] border-4 border-white bg-brand-cream p-1 shadow-[0_32px_120px_rgba(0,0,0,0.3)] sm:max-h-[calc(100dvh-2.5rem)] sm:rounded-[48px]"
         onClick={(event) => event.stopPropagation()}
       >
-        <div className="bg-brand-cream relative flex min-h-0 flex-1 flex-col overflow-y-auto rounded-[44px] p-4 sm:p-6">
+        <div className="bg-brand-cream relative flex min-h-0 flex-1 flex-col overflow-y-auto rounded-[36px] p-3 sm:rounded-[44px] sm:p-5">
           {/* Abstract subtle background gradient */}
           <div className="absolute inset-x-0 top-0 h-64 bg-linear-to-b from-brand-lime/20 via-brand-lime/5 to-transparent pointer-events-none" />
           
@@ -66,9 +66,9 @@ export const GlobalModal: React.FC = () => {
           <button
             type="button"
             onClick={closeModal}
-            className="absolute top-6 right-6 z-50 size-9 flex items-center justify-center rounded-full border-2 border-black/5 bg-white text-black hover:bg-black hover:text-white transition-all shadow-sm active:scale-90"
+            className="absolute top-4 right-4 z-50 size-8 flex items-center justify-center rounded-full border-2 border-black/5 bg-white text-black hover:bg-black hover:text-white transition-all shadow-sm active:scale-90 sm:top-6 sm:right-6 sm:size-9"
           >
-            <X size={16} />
+            <X size={14} className="sm:size-4" />
           </button>
 
           <div className="relative z-10 min-w-0">

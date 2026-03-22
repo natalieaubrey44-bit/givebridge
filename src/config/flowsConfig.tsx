@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, ArrowRight, ArrowLeft, CheckCircle2, Heart, Share2, Twitter, Facebook, Link as LinkIcon, MapPin, Check } from 'lucide-react';
+import { X, ArrowRight, ArrowLeft, CheckCircle2, Heart, MapPin, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 // --- Shared Components for Steps ---
@@ -89,17 +89,17 @@ const CampaignSummaryStep = ({ data, onNext, onBack, currentStep, totalSteps, ..
   if (!data) return <div className="p-10 text-center">Loading campaign details...</div>;
 
   return (
-    <div className="flex flex-col gap-5 py-1">
+    <div className="flex flex-col gap-4 py-0.5">
       <FlowBadge currentStep={currentStep} totalSteps={totalSteps} />
-      <div className="grid md:grid-cols-[1.2fr_0.8fr] gap-4">
+      <div className="grid gap-3 md:grid-cols-[1.2fr_0.8fr]">
         {/* Left Card */}
-        <div className="bg-white border-2 border-black/5 rounded-[32px] p-5 shadow-lg flex flex-col gap-4">
+        <div className="bg-white border-2 border-black/5 rounded-[28px] p-4 shadow-lg flex flex-col gap-3">
            <div className="inline-block px-3 py-1 bg-brand-cream border border-black/5 rounded-full w-fit">
               <span className="text-[8px] font-black uppercase tracking-widest text-black/40">Featured Campaign</span>
            </div>
            
            <div>
-              <h1 className="text-xl font-black uppercase tracking-tight mb-1 leading-tight">{data.name}</h1>
+              <h1 className="text-lg font-black uppercase tracking-tight mb-1 leading-tight sm:text-xl">{data.name}</h1>
               <p className="text-[11px] font-medium text-black/50 uppercase tracking-tight">Fighting {data.condition} with everything he has.</p>
            </div>
 
@@ -121,24 +121,11 @@ const CampaignSummaryStep = ({ data, onNext, onBack, currentStep, totalSteps, ..
               </div>
            </div>
 
-           <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                 <div className="size-6 bg-[#BF5B5B]/10 text-[#BF5B5B] rounded-full flex items-center justify-center">
-                    <Heart size={12} fill="currentColor" />
-                 </div>
-                 <span className="text-[9px] font-black uppercase tracking-tight">{data.donors} donors have given</span>
-              </div>
-              <div className="flex gap-1.5">
-                 <button className="size-6 rounded-full border border-black/5 flex items-center justify-center hover:bg-black hover:text-white transition-all"><Twitter size={10} /></button>
-                 <button className="size-6 rounded-full border border-black/5 flex items-center justify-center hover:bg-black hover:text-white transition-all"><Facebook size={10} /></button>
-                 <button className="size-6 rounded-full border border-black/5 flex items-center justify-center hover:bg-black hover:text-white transition-all"><LinkIcon size={10} /></button>
-              </div>
-           </div>
         </div>
 
         {/* Right Card / Visual */}
-        <div className="bg-white border-2 border-black/5 rounded-[32px] p-5 shadow-lg flex flex-col items-center justify-center text-center gap-4">
-           <div className="relative size-32">
+        <div className="bg-white border-2 border-black/5 rounded-[28px] p-4 shadow-lg flex flex-col items-center justify-center text-center gap-3">
+           <div className="relative size-24 sm:size-28">
               <div className="absolute inset-0 rounded-full bg-brand-lime/10 blur-xl" />
               <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-white shadow-md">
                  <img src={data.image} alt={data.firstName} className="w-full h-full object-cover" />
@@ -148,21 +135,21 @@ const CampaignSummaryStep = ({ data, onNext, onBack, currentStep, totalSteps, ..
               </div>
            </div>
            
-           <p className="text-[9px] font-medium text-black/50 leading-relaxed italic max-w-[150px]">
+           <p className="text-[8px] font-medium text-black/50 leading-relaxed italic max-w-[150px] sm:text-[9px]">
               "{data.firstName}'s campaign remains the primary focus on Givebridge while supporters rally."
            </p>
         </div>
       </div>
 
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-2.5">
         <button 
           onClick={onNext}
-          className="w-full bg-white text-black py-3.5 rounded-xl font-black text-[10px] uppercase tracking-[0.2em] shadow-lg hover:bg-black hover:text-white transition-all flex items-center justify-center gap-2 active:scale-95 group"
+          className="w-full bg-white text-black py-3 rounded-xl font-black text-[9px] uppercase tracking-[0.18em] shadow-lg hover:bg-black hover:text-white transition-all flex items-center justify-center gap-2 active:scale-95 group sm:py-3.5 sm:text-[10px]"
         >
           Donate to {data.firstName} via BitPay <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
         </button>
         
-        <div className="flex items-center justify-between gap-3 px-1">
+        <div className="flex items-center justify-between gap-3 px-0.5">
            <button 
              onClick={onBack}
              disabled={props.currentStep === 0}
@@ -201,11 +188,11 @@ const CampaignStoryStep = ({ data, onNext, onBack, currentStep, totalSteps, ...p
   }, [images.length]);
 
   return (
-    <div className="flex flex-col gap-6 py-1">
+    <div className="flex flex-col gap-4 py-0.5">
       <FlowBadge currentStep={currentStep} totalSteps={totalSteps} />
-      <div className="grid md:grid-cols-[1.1fr_0.9fr] gap-6">
+      <div className="grid gap-4 md:grid-cols-[1.1fr_0.9fr]">
         {/* Left Column: Story Text */}
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-3">
            <h2 className="text-xl font-black uppercase tracking-tight mb-0.5 sm:text-2xl">His Story</h2>
            <div className="prose prose-xs max-w-none text-black/60 font-medium leading-[1.6] space-y-3">
              {data.story.split('\n\n').slice(0, 3).map((p: string, i: number) => (
@@ -215,7 +202,7 @@ const CampaignStoryStep = ({ data, onNext, onBack, currentStep, totalSteps, ...p
         </div>
 
         {/* Right Column: Image Carousel */}
-        <div className="relative rounded-[32px] overflow-hidden border-2 border-white shadow-xl aspect-3/4 max-h-[300px] bg-black/5">
+        <div className="relative rounded-[28px] overflow-hidden border-2 border-white shadow-xl aspect-3/4 max-h-[260px] bg-black/5">
            <AnimatePresence mode="wait">
              <motion.img
                key={index}
@@ -262,7 +249,7 @@ const CampaignStoryStep = ({ data, onNext, onBack, currentStep, totalSteps, ...p
         </div>
       </div>
 
-      <div className="flex items-center justify-between gap-3 mt-2 pt-4 border-t border-black/5">
+      <div className="flex items-center justify-between gap-3 mt-1 pt-3 border-t border-black/5">
         <button 
           onClick={onBack}
           className="flex items-center gap-2 text-[9px] font-black uppercase tracking-widest text-black/40 hover:text-black transition-colors active:scale-95"
@@ -295,13 +282,13 @@ const CampaignMedicalStep = ({ data, onNext, onBack, currentStep, totalSteps, ..
   const pct = Math.round((data.raised / data.goal) * 100);
 
   return (
-    <div className="flex flex-col gap-6 py-1">
+    <div className="flex flex-col gap-4 py-0.5">
       <FlowBadge currentStep={currentStep} totalSteps={totalSteps} />
       <h2 className="text-xl font-black uppercase tracking-tight sm:text-2xl">Medical Details</h2>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 gap-2.5 md:grid-cols-2 lg:grid-cols-3">
         {details.map((detail, i) => (
-          <div key={i} className="bg-white border-2 border-black/5 rounded-2xl p-4 shadow-sm flex flex-col gap-2 group hover:border-black/10 transition-all">
+          <div key={i} className="bg-white border-2 border-black/5 rounded-2xl p-3.5 shadow-sm flex flex-col gap-2 group hover:border-black/10 transition-all">
             <div className="flex items-center gap-2">
               <span className="text-sm">{detail.icon}</span>
               <span className="text-[10px] font-black uppercase tracking-widest text-black/40">{detail.label}:</span>
@@ -313,7 +300,7 @@ const CampaignMedicalStep = ({ data, onNext, onBack, currentStep, totalSteps, ..
         ))}
 
         {/* Progress Bar Card (Replacing Total Estimated Cost) */}
-        <div className="bg-white border-2 border-black/5 rounded-2xl p-4 shadow-sm flex flex-col justify-center gap-3">
+        <div className="bg-white border-2 border-black/5 rounded-2xl p-3.5 shadow-sm flex flex-col justify-center gap-3">
            <div className="flex justify-between items-center">
              <div className="flex items-center gap-2">
                <span className="text-sm">📈</span>
@@ -338,7 +325,7 @@ const CampaignMedicalStep = ({ data, onNext, onBack, currentStep, totalSteps, ..
         </div>
       </div>
 
-      <div className="flex items-center justify-between gap-3 mt-4 pt-4 border-t border-black/5">
+      <div className="flex items-center justify-between gap-3 mt-2 pt-3 border-t border-black/5">
         <button 
           onClick={onBack}
           className="flex items-center gap-2 text-[9px] font-black uppercase tracking-widest text-black/40 hover:text-black transition-colors active:scale-95"
@@ -404,7 +391,7 @@ const FinalStep = ({ name, bitpayUrl = "https://bitpay.com/", onClose, ...props 
         Your support for {name} will make a direct impact. Complete your donation via BitPay to finalize.
       </p>
 
-      <div className="space-y-3 w-full relative z-10 max-w-[300px]">
+    <div className="space-y-3 w-full relative z-10 max-w-[300px]">
         <a
           href={bitpayUrl}
           target="_blank"
