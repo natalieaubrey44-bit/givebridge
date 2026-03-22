@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-lime: #d9ff80;
+  --color-brand-cream: #f9f8f3;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Real CSS custom property — reliably available everywhere including body padding */
+:root {
+  --nav-h: 68px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--nav-h);
+  }
+  body {
+    @apply bg-brand-cream text-black antialiased;
+    padding-top: var(--nav-h);
+  }
+}
+
+@layer components {
+  /* 100vh Section Containers */
+  .section-100vh {
+    @apply flex flex-col justify-center items-center overflow-hidden;
+    min-height: calc(100vh - var(--nav-h));
+  }
+
+  /* Compact heading scales */
+  .h1-compact {
+    @apply text-4xl md:text-5xl font-black uppercase leading-[1.1] tracking-tight;
+  }
+
+  .h2-compact {
+    @apply text-2xl md:text-3xl font-black uppercase leading-[1.1] tracking-tight;
+  }
+
+  .h3-compact {
+    @apply text-xl md:text-2xl font-black uppercase leading-tight tracking-tight;
+  }
+
+  /* Tight spacing system */
+  .section-py {
+    @apply py-4 md:py-6;
+  }
+
+  .section-px {
+    @apply px-6 md:px-10;
+  }
+
+  .gap-compact {
+    @apply gap-4 md:gap-6;
+  }
+
+  /* Card horizontal layout */
+  .card-horizontal {
+    @apply flex flex-col md:flex-row items-stretch gap-4 md:gap-6;
+  }
+
+  .card-image {
+    @apply w-full md:w-32 md:h-auto aspect-video md:aspect-auto object-cover rounded-2xl md:rounded-3xl shrink-0;
+  }
+
+  .card-content {
+    @apply flex flex-col justify-between flex-1;
+  }
+
+  /* Compact stat/metric box */
+  .stat-box {
+    @apply flex flex-col gap-1;
+  }
+
+  .stat-value {
+    @apply text-3xl md:text-4xl font-black tracking-tighter;
+  }
+
+  .stat-label {
+    @apply text-[10px] text-gray-400 font-black uppercase tracking-[0.2em];
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+
+/* Utility: horizontally mirror an element */
+.mirror-x {
+  transform: scaleX(-1);
+}
+
+/* Utility: hide scrollbar while keeping scroll behavior */
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

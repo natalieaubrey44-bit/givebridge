@@ -1,0 +1,9 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Givebridge logo mark">
+  <rect width="128" height="128" rx="32" fill="#0B0B0B"/>
+  <path d="M28 74C28 56.3269 42.3269 42 60 42H68C85.6731 42 100 56.3269 100 74" stroke="#FFF8EF" stroke-width="8" stroke-linecap="round"/>
+  <path d="M36 78H92" stroke="#FFF8EF" stroke-width="8" stroke-linecap="round"/>
+  <path d="M44 78V92" stroke="#FFF8EF" stroke-width="8" stroke-linecap="round"/>
+  <path d="M84 78V92" stroke="#FFF8EF" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="64" cy="76" r="8" fill="#DFFF63"/>
+  <circle cx="64" cy="76" r="3" fill="#0B0B0B"/>
+</svg>
