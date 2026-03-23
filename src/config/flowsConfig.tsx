@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { X, ArrowRight, ArrowLeft, CheckCircle2, Heart, Share2, Twitter, Facebook, Link as LinkIcon, MapPin, Check } from 'lucide-react';
+import { X, ArrowRight, ArrowLeft, CheckCircle2, Heart, Share2, Twitter, Facebook, MapPin } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { BITCOIN_WALLET_ADDRESS } from '../data/campaignsData';
 
 // --- Shared Components for Steps ---
 
@@ -382,11 +383,16 @@ function openExternalUrl(url: string) {
   window.open(url, '_blank', 'noopener,noreferrer');
 }
 
-const FinalStep = ({ name, bitpayUrl = "https://bitpay.com/", onClose, ...props }: any) => {
+const getWalletQrUrl = (walletAddress: string) =>
+  `https://api.qrserver.com/v1/create-qr-code/?size=320x320&margin=16&data=${encodeURIComponent(walletAddress)}`;
+
+const FinalStep = ({ name, bitpayUrl = "https://bitpay.com/", onClose, flowData, ...props }: any) => {
   const [copied, setCopied] = useState(false);
+  const walletAddress = (flowData?.bitcoinAddress ?? BITCOIN_WALLET_ADDRESS)?.trim();
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(window.location.href);
+    if (!walletAddress) return;
+    navigator.clipboard.writeText(walletAddress);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -414,15 +420,44 @@ const FinalStep = ({ name, bitpayUrl = "https://bitpay.com/", onClose, ...props 
           DONATE VIA BITPAY <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
         </a>
 
+        {walletAddress ? (
+          <div className="rounded-2xl border-2 border-black/5 bg-white p-4 shadow-sm">
+            <div className="flex flex-col items-center gap-3">
+              <div className="rounded-2xl bg-brand-cream p-3">
+                <img
+                  src={getWalletQrUrl(walletAddress)}
+                  alt="Bitcoin wallet QR code"
+                  className="h-36 w-36 rounded-xl bg-white object-contain"
+                />
+              </div>
+              <div className="w-full space-y-2">
+                <div className="rounded-xl border border-black/5 bg-brand-cream px-3 py-2 text-[9px] font-black uppercase tracking-[0.16em] text-black break-all">
+                  {walletAddress}
+                </div>
+                <button
+                  type="button"
+                  onClick={handleCopy}
+                  className="w-full rounded-xl border-2 border-black bg-black px-4 py-3 text-[9px] font-black uppercase tracking-[0.18em] text-white transition-colors hover:bg-gray-900"
+                >
+                  {copied ? "Wallet copied" : "Copy wallet address"}
+                </button>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="rounded-2xl border-2 border-dashed border-black/10 bg-white p-4 text-left">
+            <p className="text-[10px] font-black uppercase tracking-[0.18em] text-black">
+              Add a bitcoinAddress to the campaign data
+            </p>
+            <p className="mt-1 text-[10px] leading-relaxed text-black/55">
+              The QR code and copy button will appear here once you set `bitcoinAddress` for the campaign.
+            </p>
+          </div>
+        )}
+
         <div className="flex gap-2.5 justify-center pt-4 items-center">
            <button type="button" onClick={() => openExternalUrl('https://twitter.com/intent/tweet?text=Support this campaign!')} className="size-10 rounded-full border-2 border-black/5 flex items-center justify-center hover:bg-black hover:text-white transition-all shadow-sm"><Twitter size={14} /></button>
            <button type="button" onClick={() => openExternalUrl('https://facebook.com/sharer/sharer.php?u=' + encodeURIComponent(window.location.href))} className="size-10 rounded-full border-2 border-black/5 flex items-center justify-center hover:bg-black hover:text-white transition-all shadow-sm"><Facebook size={14} /></button>
-           <button 
-             onClick={handleCopy}
-             className="flex items-center gap-2 border-2 border-black/5 bg-white px-4 py-2.5 rounded-full text-[9px] font-black uppercase tracking-widest hover:border-black transition-all shadow-sm active:scale-95"
-           >
-              {copied ? <><Check size={12} className="text-brand-lime" /> Copied!</> : <><LinkIcon size={12} /> Copy Link</>}
-           </button>
         </div>
       </div>
     </div>

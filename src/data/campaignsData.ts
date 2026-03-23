@@ -1,3 +1,5 @@
+export const BITCOIN_WALLET_ADDRESS = "bc1qqmxh9ckcg4zyqmgkv276c63k26cg8w9tm3sjmp";
+
 export const CAMPAIGNS_DATA: Record<string, any> = {
   neil: {
     name: "Neil, Age 8 - Columbus, Ohio",
@@ -28,6 +30,7 @@ export const CAMPAIGNS_DATA: Record<string, any> = {
     ],
     donors: 317,
     supportEmail: "forNeil@gmail.com",
+    bitcoinAddress: BITCOIN_WALLET_ADDRESS,
   },
   liam: {
     name: "Liam, Age 5 - Memphis, TN",
@@ -57,6 +60,7 @@ export const CAMPAIGNS_DATA: Record<string, any> = {
     ],
     donors: 245,
     supportEmail: "support-liam@gmail.com",
+    bitcoinAddress: BITCOIN_WALLET_ADDRESS,
   },
   aria: {
     name: "Aria, Age 4 - Boston, MA",
@@ -85,5 +89,6 @@ export const CAMPAIGNS_DATA: Record<string, any> = {
     ],
     donors: 112,
     supportEmail: "support-aria@gmail.com",
+    bitcoinAddress: BITCOIN_WALLET_ADDRESS,
   },
 };
