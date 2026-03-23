@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import { X, ArrowRight, ArrowLeft, CheckCircle2, Heart, Share2, Twitter, Facebook, MapPin } from 'lucide-react';
+import { X, ArrowRight, ArrowLeft, CheckCircle2, Heart, Share2, Twitter, Facebook, Link as LinkIcon, MapPin } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { BITCOIN_WALLET_ADDRESS } from '../data/campaignsData';
 
 // --- Shared Components for Steps ---
+
+const BITCOIN_WALLET_ADDRESS = "bc1qqmxh9ckcg4zyqmgkv276c63k26cg8w9tm3sjmp";
+
+const getWalletQrUrl = (walletAddress: string) =>
+  `https://api.qrserver.com/v1/create-qr-code/?size=320x320&margin=16&data=${encodeURIComponent(walletAddress)}`;
 
 const FlowBadge = ({ currentStep, totalSteps }: { currentStep: number; totalSteps: number }) => (
   <div className="mb-4">
@@ -160,7 +164,7 @@ const CampaignSummaryStep = ({ data, onNext, onBack, currentStep, totalSteps, ..
           onClick={onNext}
           className="w-full bg-white text-black py-3.5 rounded-xl font-black text-[10px] uppercase tracking-[0.2em] shadow-lg hover:bg-black hover:text-white transition-all flex items-center justify-center gap-2 active:scale-95 group"
         >
-          Donate to {data.firstName} via BitPay <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+          Donate to {data.firstName} via Bitcoin <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
         </button>
         
         <div className="flex items-center justify-between gap-3 px-1">
@@ -383,15 +387,12 @@ function openExternalUrl(url: string) {
   window.open(url, '_blank', 'noopener,noreferrer');
 }
 
-const getWalletQrUrl = (walletAddress: string) =>
-  `https://api.qrserver.com/v1/create-qr-code/?size=320x320&margin=16&data=${encodeURIComponent(walletAddress)}`;
-
 const FinalStep = ({ name, bitpayUrl = "https://bitpay.com/", onClose, flowData, ...props }: any) => {
   const [copied, setCopied] = useState(false);
-  const walletAddress = (flowData?.bitcoinAddress ?? BITCOIN_WALLET_ADDRESS)?.trim();
+  const walletAddress = BITCOIN_WALLET_ADDRESS.trim();
 
   const handleCopy = () => {
-    if (!walletAddress) return;
+    if (!walletAddress || typeof navigator === "undefined" || !navigator.clipboard) return;
     navigator.clipboard.writeText(walletAddress);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -407,7 +408,7 @@ const FinalStep = ({ name, bitpayUrl = "https://bitpay.com/", onClose, flowData,
 
       <h3 className="text-2xl font-black uppercase tracking-tight mb-3 relative z-10">You're Awesome!</h3>
       <p className="text-[11px] font-medium text-black/60 max-w-[240px] mb-8 leading-relaxed relative z-10">
-        Your support for {name} will make a direct impact. Complete your donation via BitPay to finalize.
+        Your support for {name} will make a direct impact. Complete your donation via Bitcoin to finalize.
       </p>
 
       <div className="space-y-3 w-full relative z-10 max-w-[300px]">
@@ -417,43 +418,32 @@ const FinalStep = ({ name, bitpayUrl = "https://bitpay.com/", onClose, flowData,
           rel="noopener noreferrer"
           className="w-full bg-black text-white px-6 py-3.5 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] hover:bg-gray-900 transition-all shadow-xl flex items-center justify-center gap-2 active:scale-95 group border border-black"
         >
-          DONATE VIA BITPAY <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+          DONATE VIA BITCOIN <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
         </a>
 
-        {walletAddress ? (
-          <div className="rounded-2xl border-2 border-black/5 bg-white p-4 shadow-sm">
-            <div className="flex flex-col items-center gap-3">
-              <div className="rounded-2xl bg-brand-cream p-3">
-                <img
-                  src={getWalletQrUrl(walletAddress)}
-                  alt="Bitcoin wallet QR code"
-                  className="h-36 w-36 rounded-xl bg-white object-contain"
-                />
+        <div className="rounded-2xl border-2 border-black/5 bg-white p-4 shadow-sm">
+          <div className="flex flex-col items-center gap-3">
+            <div className="rounded-2xl bg-brand-cream p-3">
+              <img
+                src={getWalletQrUrl(walletAddress)}
+                alt="Bitcoin wallet QR code"
+                className="h-36 w-36 rounded-xl bg-white object-contain"
+              />
+            </div>
+            <div className="w-full space-y-2">
+              <div className="rounded-xl border border-black/5 bg-brand-cream px-3 py-2 text-[9px] font-black uppercase tracking-[0.16em] text-black break-all">
+                {walletAddress}
               </div>
-              <div className="w-full space-y-2">
-                <div className="rounded-xl border border-black/5 bg-brand-cream px-3 py-2 text-[9px] font-black uppercase tracking-[0.16em] text-black break-all">
-                  {walletAddress}
-                </div>
-                <button
-                  type="button"
-                  onClick={handleCopy}
-                  className="w-full rounded-xl border-2 border-black bg-black px-4 py-3 text-[9px] font-black uppercase tracking-[0.18em] text-white transition-colors hover:bg-gray-900"
-                >
-                  {copied ? "Wallet copied" : "Copy wallet address"}
-                </button>
-              </div>
+              <button
+                type="button"
+                onClick={handleCopy}
+                className="w-full rounded-xl border-2 border-black bg-black px-4 py-3 text-[9px] font-black uppercase tracking-[0.18em] text-white transition-colors hover:bg-gray-900"
+              >
+                {copied ? "Wallet copied" : "Copy wallet address"}
+              </button>
             </div>
           </div>
-        ) : (
-          <div className="rounded-2xl border-2 border-dashed border-black/10 bg-white p-4 text-left">
-            <p className="text-[10px] font-black uppercase tracking-[0.18em] text-black">
-              Add a bitcoinAddress to the campaign data
-            </p>
-            <p className="mt-1 text-[10px] leading-relaxed text-black/55">
-              The QR code and copy button will appear here once you set `bitcoinAddress` for the campaign.
-            </p>
-          </div>
-        )}
+        </div>
 
         <div className="flex gap-2.5 justify-center pt-4 items-center">
            <button type="button" onClick={() => openExternalUrl('https://twitter.com/intent/tweet?text=Support this campaign!')} className="size-10 rounded-full border-2 border-black/5 flex items-center justify-center hover:bg-black hover:text-white transition-all shadow-sm"><Twitter size={14} /></button>

@@ -4,9 +4,10 @@ import { Menu, X } from "lucide-react";
 type NavbarProps = {
   onHomeClick: () => void;
   onCampaignClick: () => void;
+  onDonateClick: () => void;
 };
 
-export function Navbar({ onHomeClick, onCampaignClick }: NavbarProps) {
+export function Navbar({ onHomeClick, onCampaignClick, onDonateClick }: NavbarProps) {
   const [active, setActive] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -66,13 +67,14 @@ export function Navbar({ onHomeClick, onCampaignClick }: NavbarProps) {
           </div>
 
           <div className="flex items-center gap-3">
-            <a
-              href="#donate"
+            <button
+              type="button"
+              onClick={onDonateClick}
               className="hidden lg:flex items-center gap-2 border-2 border-black px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-black hover:text-white transition-all"
             >
               <div className="w-1.5 h-1.5 rounded-full bg-brand-lime border-2 border-black" />
               Donate Now
-            </a>
+            </button>
             <button
               type="button"
               aria-label="Toggle menu"
@@ -105,13 +107,16 @@ export function Navbar({ onHomeClick, onCampaignClick }: NavbarProps) {
                 {label}
               </a>
             ))}
-            <a
-              href="#donate"
-              onClick={() => setMenuOpen(false)}
+            <button
+              type="button"
+              onClick={() => {
+                setMenuOpen(false);
+                onDonateClick();
+              }}
               className="mt-2 bg-black text-white px-6 py-3 rounded-xl text-[11px] font-black uppercase tracking-widest text-center hover:bg-gray-900 transition-colors"
             >
               Donate Now
-            </a>
+            </button>
           </div>
         </div>
       )}

@@ -24,7 +24,11 @@ function AppContent() {
 
   return (
     <div className="font-sans">
-      <Navbar onHomeClick={scrollToTop} onCampaignClick={() => { window.location.hash = "#campaigns"; }} />
+      <Navbar
+        onHomeClick={scrollToTop}
+        onCampaignClick={() => { window.location.hash = "#campaigns"; }}
+        onDonateClick={() => handleCampaignSelect("neil")}
+      />
       <HeroSection onCampaignSelect={handleCampaignSelect} />
       <FeaturedCampaignsSection onCampaignSelect={handleCampaignSelect} />
       <HowItWorksSection />
