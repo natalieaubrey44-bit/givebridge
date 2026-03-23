@@ -387,7 +387,7 @@ function openExternalUrl(url: string) {
   window.open(url, '_blank', 'noopener,noreferrer');
 }
 
-const FinalStep = ({ name, bitpayUrl = "https://bitpay.com/", onClose, flowData, ...props }: any) => {
+const FinalStep = ({ name, onClose, flowData, ...props }: any) => {
   const [copied, setCopied] = useState(false);
   const walletAddress = BITCOIN_WALLET_ADDRESS.trim();
 
@@ -412,15 +412,6 @@ const FinalStep = ({ name, bitpayUrl = "https://bitpay.com/", onClose, flowData,
       </p>
 
       <div className="space-y-3 w-full relative z-10 max-w-[300px]">
-        <a
-          href={bitpayUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="w-full bg-black text-white px-6 py-3.5 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] hover:bg-gray-900 transition-all shadow-xl flex items-center justify-center gap-2 active:scale-95 group border border-black"
-        >
-          DONATE VIA BITCOIN <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
-        </a>
-
         <div className="rounded-2xl border-2 border-black/5 bg-white p-4 shadow-sm">
           <div className="flex flex-col items-center gap-3">
             <div className="rounded-2xl bg-brand-cream p-3">
