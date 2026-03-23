@@ -431,7 +431,7 @@ const FinalStep = ({ name, bitpayUrl = "https://bitpay.com/", onClose, flowData,
               />
             </div>
             <div className="w-full space-y-2">
-              <div className="rounded-xl border border-black/5 bg-brand-cream px-3 py-2 text-[9px] font-black uppercase tracking-[0.16em] text-black break-all">
+              <div className="rounded-xl border border-black/5 bg-brand-cream px-3 py-2 text-[9px] font-black tracking-[0.16em] text-black break-all">
                 {walletAddress}
               </div>
               <button
