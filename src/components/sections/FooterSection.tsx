@@ -5,6 +5,8 @@ type FooterSectionProps = {
 };
 
 export function FooterSection({ onHomeClick }: FooterSectionProps) {
+  const whatsappLink = "https://wa.me/19365263055";
+
   return (
     <footer id="contact" className="bg-black text-white pt-12 pb-8 section-px">
       <div className="max-w-360 mx-auto">
@@ -42,6 +44,14 @@ export function FooterSection({ onHomeClick }: FooterSectionProps) {
               <br />
               United States
             </p>
+            <a
+              href={whatsappLink}
+              target="_blank"
+              rel="noreferrer"
+              className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white transition-colors hover:border-brand-lime hover:text-brand-lime"
+            >
+              WhatsApp: +1 936 526 3055
+            </a>
             <div className="flex gap-5">
               <Instagram className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors" />
               <Twitter className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors" />
